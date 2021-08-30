@@ -4,21 +4,21 @@
 \alias{saveSCEFile}
 \title{Save SCEmbroider files}
 \usage{
-saveSCEFile(path, object, assay = "RNA", dims = 1:5, cluster.id = NULL)
+saveSCEFile(object, path, assay = "RNA", dims = 1:5, cluster.id = NULL)
 }
 \arguments{
-\item{path}{Path of directory to save files}
-
 \item{object}{A Seurat object}
+
+\item{path}{Path of directory to save files}
 
 \item{assay}{Name of Assay to make files}
 
-\item{dims}{Which dimensions to use as input features (Only if tsne or umap is missing)}
+\item{dims}{Which dimensions to use as input features (Only if pca, tsne or umap is missing)}
 
 \item{cluster.id}{If set, save name of the cluster idents with this column instead of default idents}
 }
 \value{
-A matrix of the infile
+A Seurat object modified in this function
 }
 \description{
 Save a Seurat Object into SCEmbroider files. These file is used when loading new data in SCEmbroider program. Runs PCA, TSNE, UMAP if do not exists.
