@@ -11,7 +11,7 @@
 #' @return A Seurat object modified in this function
 #' @export
 
-saveSCEFile <- function(object, path, assay = "RNA", dims = 1:5, cluster.id = NULL) {
+saveSCEFile <- function(object, path = "./", assay = "RNA", dims = 1:5, cluster.id = NULL) {
   new_object <- UpdateSeuratObject(object)
 
   if(length(VariableFeatures(new_object)) == 0) {
@@ -69,11 +69,12 @@ saveSCEFile <- function(object, path, assay = "RNA", dims = 1:5, cluster.id = NU
   else {
     Annotation$cluster.ident <- Idents(object = new_object)
   }
-  writeMat('./SCE/GC_Data.mat',
+
+  writeMat(paste(path, './SCE/GC_Data.mat'),
            GCidx = GCidx, GCval = GCval, GCnum = GCnum, GCdim = GCdim, GCsum = GCsum, TSNE = TSNE, UMAP = UMAP)
 
-  write.csv(GENE, './SCE/Gene_Name.csv')
-  write.csv(Annotation, './SCE/Cell_Type.csv')
+  write.csv(GENE, paste(path, './SCE/Gene_Name.csv'))
+  write.csv(Annotation, paste(path, './SCE/Cell_Type.csv'))
 
   return(new_object)
 }
